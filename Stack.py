@@ -1,56 +1,69 @@
-stack = []
+class Stack:
+    def __init__(self):
+        self.TOP = -1
+        self.st = [0] * 100
 
-def push():
-    element = int(input("Enter element to push: "))
-    stack.append(element)
-    print("Element pushed successfully.")
+    def push(self, x):
+        if self.TOP == 99:
+            print("Stack Overflow")
+            return
 
-def pop():
-    if len(stack) == 0:
-        print("Stack Underflow! Stack is empty.")
-    else:
-        element = stack.pop()
-        print("Popped element:", element)
+        self.TOP += 1
+        self.st[self.TOP] = x
 
-def peek():
-    if len(stack) == 0:
-        print("Stack is empty.")
-    else:
-        print("Top element:", stack[-1])
+    def pop(self):
+        if self.TOP == -1:
+            print("Stack Underflow")
+            return
 
-def display():
-    if len(stack) == 0:
-        print("Stack is empty.")
-    else:
-        print("Stack elements:")
-        for element in reversed(stack):
-            print(element)
+        x = self.st[self.TOP]
+        self.TOP -= 1
+        return x
+
+    def peek(self):
+        if self.TOP == -1:
+            print("Stack is Empty")
+        else:
+            print("Top Element =", self.st[self.TOP])
+
+    def display(self):
+        if self.TOP == -1:
+            print("Stack is Empty")
+        else:
+            print("Stack Elements:")
+            for i in range(self.TOP, -1, -1):
+                print(self.st[i], end=" ")
+            print()
+
+
+s = Stack()
 
 while True:
-    print("\n--- Stack Operations ---")
-    print("1. Push")
+    print("\n1. Push")
     print("2. Pop")
     print("3. Peek")
     print("4. Display")
     print("5. Exit")
 
-    choice = int(input("Enter your choice: "))
+    ch = int(input("Enter Choice: "))
 
-    if choice == 1:
-        push()
+    if ch == 1:
+        x = int(input("Enter Element: "))
+        s.push(x)
 
-    elif choice == 2:
-        pop()
+    elif ch == 2:
+        x = s.pop()
+        if x is not None:
+            print("Popped Element =", x)
 
-    elif choice == 3:
-        peek()
+    elif ch == 3:
+        s.peek()
 
-    elif choice == 4:
-        display()
+    elif ch == 4:
+        s.display()
 
-    elif choice == 5:
-        print("Exiting program...")
+    elif ch == 5:
         break
 
     else:
-        print("Invalid choice.")
+        print("Invalid Choice")
